@@ -1,6 +1,6 @@
 @interface JSGCDDispatcher : NSObject {
   @private  
-	dispatch_queue_t serial_dispatch_queue;
+  dispatch_queue_t serial_dispatch_queue;
   dispatch_group_t serial_group;
 }
 
