@@ -1,0 +1,214 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B499768142AB43000AA0B9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B499767142AB43000AA0B9E /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4B499764142AB43000AA0B9E /* libJSGCDDispatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSGCDDispatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B499767142AB43000AA0B9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4B49976B142AB43100AA0B9E /* JSGCDDispatcher-Prefix.pch */ = {isa = PBXFileReference; path = "JSGCDDispatcher-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B499761142AB43000AA0B9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B499768142AB43000AA0B9E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B499759142AB43000AA0B9E = {
+			isa = PBXGroup;
+			children = (
+				4B499769142AB43000AA0B9E /* JSGCDDispatcher */,
+				4B499766142AB43000AA0B9E /* Frameworks */,
+				4B499765142AB43000AA0B9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4B499765142AB43000AA0B9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B499764142AB43000AA0B9E /* libJSGCDDispatcher.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B499766142AB43000AA0B9E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B499767142AB43000AA0B9E /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4B499769142AB43000AA0B9E /* JSGCDDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				4B49976A142AB43100AA0B9E /* Supporting Files */,
+			);
+			path = JSGCDDispatcher;
+			sourceTree = "<group>";
+		};
+		4B49976A142AB43100AA0B9E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4B49976B142AB43100AA0B9E /* JSGCDDispatcher-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4B499762142AB43000AA0B9E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4B499763142AB43000AA0B9E /* JSGCDDispatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B49976E142AB43100AA0B9E /* Build configuration list for PBXNativeTarget "JSGCDDispatcher" */;
+			buildPhases = (
+				4B499760142AB43000AA0B9E /* Sources */,
+				4B499761142AB43000AA0B9E /* Frameworks */,
+				4B499762142AB43000AA0B9E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JSGCDDispatcher;
+			productName = JSGCDDispatcher;
+			productReference = 4B499764142AB43000AA0B9E /* libJSGCDDispatcher.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B49975B142AB43000AA0B9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Atomic Object";
+			};
+			buildConfigurationList = 4B49975E142AB43000AA0B9E /* Build configuration list for PBXProject "JSGCDDispatcher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4B499759142AB43000AA0B9E;
+			productRefGroup = 4B499765142AB43000AA0B9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4B499763142AB43000AA0B9E /* JSGCDDispatcher */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B499760142AB43000AA0B9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4B49976C142AB43100AA0B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4B49976D142AB43100AA0B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		4B49976F142AB43100AA0B9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/JSGCDDispatcher.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSGCDDispatcher/JSGCDDispatcher-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4B499770142AB43100AA0B9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/JSGCDDispatcher.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSGCDDispatcher/JSGCDDispatcher-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B49975E142AB43000AA0B9E /* Build configuration list for PBXProject "JSGCDDispatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B49976C142AB43100AA0B9E /* Debug */,
+				4B49976D142AB43100AA0B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B49976E142AB43100AA0B9E /* Build configuration list for PBXNativeTarget "JSGCDDispatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B49976F142AB43100AA0B9E /* Debug */,
+				4B499770142AB43100AA0B9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B49975B142AB43000AA0B9E /* Project object */;
+}
