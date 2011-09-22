@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4B499768142AB43000AA0B9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B499767142AB43000AA0B9E /* Foundation.framework */; };
+		4B499773142AB4B400AA0B9E /* JSGCDDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B499771142AB4B400AA0B9E /* JSGCDDispatcher.m */; };
+		4B499774142AB4B400AA0B9E /* JSGCDDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B499772142AB4B400AA0B9E /* JSGCDDispatcher.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4B499764142AB43000AA0B9E /* libJSGCDDispatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSGCDDispatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B499767142AB43000AA0B9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4B49976B142AB43100AA0B9E /* JSGCDDispatcher-Prefix.pch */ = {isa = PBXFileReference; path = "JSGCDDispatcher-Prefix.pch"; sourceTree = "<group>"; };
+		4B49976B142AB43100AA0B9E /* JSGCDDispatcher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSGCDDispatcher-Prefix.pch"; sourceTree = "<group>"; };
+		4B499771142AB4B400AA0B9E /* JSGCDDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGCDDispatcher.m; sourceTree = "<group>"; };
+		4B499772142AB4B400AA0B9E /* JSGCDDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGCDDispatcher.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		4B499769142AB43000AA0B9E /* JSGCDDispatcher */ = {
 			isa = PBXGroup;
 			children = (
+				4B499771142AB4B400AA0B9E /* JSGCDDispatcher.m */,
+				4B499772142AB4B400AA0B9E /* JSGCDDispatcher.h */,
 				4B49976A142AB43100AA0B9E /* Supporting Files */,
 			);
 			path = JSGCDDispatcher;
@@ -76,6 +82,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B499774142AB4B400AA0B9E /* JSGCDDispatcher.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B499773142AB4B400AA0B9E /* JSGCDDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
