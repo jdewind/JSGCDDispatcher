@@ -1,6 +1,6 @@
 # JSGCDDispatcher, a small Objective-C wrapper around GCD
 
-JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple interface to submit blocks to GCD either on serial or concurrent queue.
+JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple interface to submit blocks to GCD either on the serial or concurrent queue.
 
 ```objective-c
 [[JSGCDDipatcher sharedDispatcher] dispatch:^{
