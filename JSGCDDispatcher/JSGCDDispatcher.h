@@ -13,8 +13,8 @@
 @property (nonatomic, readonly, copy) NSString *serialQueueID;
 
 - (id)initWithSerialQueueID:(NSString *)serialQueueID;
-- (void)submitSerialQueueCompletionListener:(void (^)(void))block;
 
+- (void)submitSerialQueueCompletionListener:(void (^)(void))block;
 - (void)dispatch:(void (^)(void))block serial:(BOOL)runOnSerialQueue;
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority;
 - (void)dispatchOnSerialQueue:(void (^)(void))block;

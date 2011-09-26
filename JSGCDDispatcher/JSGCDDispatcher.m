@@ -47,12 +47,12 @@ static JSGCDDispatcher *gsharedGCDDispatcher;
 #pragma mark Dispatching Methods
 
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority {
-  dispatch_async(dispatch_get_global_queue(priority, NULL), block);
+  dispatch_async(dispatch_get_global_queue(priority, 0), block);
 }
 
 - (void)dispatch:(void (^)(void))block serial:(BOOL)runOnSerialQueue {
   if (!runOnSerialQueue) {
-    dispatch_async(dispatch_get_global_queue(0, NULL), block);
+    dispatch_async(dispatch_get_global_queue(0, 0), block);
   } else {
     [self dispatchOnSerialQueue:block];
   }
