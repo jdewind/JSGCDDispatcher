@@ -1,6 +1,6 @@
 #import "JSGCDDispatcher.h"
 
-static JSGCDDispatcher *gsharedGCDDispatcher;
+static JSGCDDispatcher *gSharedGCDDispatcher;
 
 @implementation JSGCDDispatcher
 
@@ -11,12 +11,12 @@ static JSGCDDispatcher *gsharedGCDDispatcher;
 
 + (void)initialize {
   if (self == [JSGCDDispatcher class]) {
-    gsharedGCDDispatcher = [[self alloc] initWithSerialQueueID:@"com.jsgcd.dispatch"];    
+    gSharedGCDDispatcher = [[self alloc] initWithSerialQueueID:@"com.jsgcd.dispatch"];    
   }
 }
 
 + (id)sharedDispatcher {
-  return gsharedGCDDispatcher;    
+  return gSharedGCDDispatcher;    
 }
 
 + (id)dispatcherWithSerialQueueID:(NSString *)serialQueueID {
