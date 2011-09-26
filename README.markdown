@@ -3,9 +3,9 @@
 JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple interface to submit blocks to GCD either on serial or concurrent queue.
 
 ```objective-c
-[[JSGCDDipatcher sharedDispatcher] dispatchAsync:^{
+[[JSGCDDipatcher sharedDispatcher] dispatch:^{
   // Busy Work
-} concurrent:YES];
+} serial:NO];
 ```
 
 ```objective-c
@@ -14,5 +14,9 @@ JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple 
 }];
 ```
 
+# TODO
+
+* Add Kiwi Specs
+* Better documentation
 
 
