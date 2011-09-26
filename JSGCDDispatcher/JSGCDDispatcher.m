@@ -1,28 +1,35 @@
 #import "JSGCDDispatcher.h"
 
-static JSGCDDispatcher *_sharedGCDDispatcher;
+static JSGCDDispatcher *gsharedGCDDispatcher;
 
 @implementation JSGCDDispatcher
+
+@synthesize serialQueueID = _serialQueueID;
 
 #pragma mark -
 #pragma mark Class Methods
 
 + (void)initialize {
   if (self == [JSGCDDispatcher class]) {
-    _sharedGCDDispatcher = [[[self class] alloc] init];    
+    gsharedGCDDispatcher = [[self alloc] initWithSerialQueueID:@"com.jsgcd.dispatch"];    
   }
 }
 
 + (id)sharedDispatcher {
-  return _sharedGCDDispatcher;    
+  return gsharedGCDDispatcher;    
+}
+
++ (id)dispatcherWithSerialQueueID:(NSString *)serialQueueID {
+  return [[[self alloc] initWithSerialQueueID:serialQueueID] autorelease];
 }
 
 #pragma mark -
 #pragma mark Instance Methods
 
-- (id)init {
+- (id)initWithSerialQueueID:(NSString *)serialQueueID {
   if ((self = [super init])) {
-    serial_dispatch_queue = dispatch_queue_create("com.jsgcd.dispatch", NULL);
+    _serialQueueID = [serialQueueID copy];
+    serial_dispatch_queue = dispatch_queue_create([self.serialQueueID UTF8String], NULL);
     serial_group = dispatch_group_create();
   }
   
@@ -31,23 +38,28 @@ static JSGCDDispatcher *_sharedGCDDispatcher;
 
 - (void)dealloc {
   dispatch_release(serial_dispatch_queue);
-  dispatch_release(serial_group);
+  dispatch_release(serial_group);  
+  [_serialQueueID release];
   [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Dispatching Methods
 
-- (void)dispatchAsync:(void (^)(void))block concurrent:(BOOL)runConcurrently {
-  if (runConcurrently) {
-    dispatch_async(dispatch_get_global_queue(0, 0), block);
+- (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority {
+  dispatch_async(dispatch_get_global_queue(priority, NULL), block);
+}
+
+- (void)dispatch:(void (^)(void))block serial:(BOOL)runOnSerialQueue {
+  if (!runOnSerialQueue) {
+    dispatch_async(dispatch_get_global_queue(0, NULL), block);
   } else {
-    [self dispatchAsync:block];
+    [self dispatchOnSerialQueue:block];
   }
 
 }
 
-- (void)dispatchAsync:(void (^)(void))block {
+- (void)dispatchOnSerialQueue:(void (^)(void))block {
   dispatch_group_async(serial_group, serial_dispatch_queue, block);
 }
 
@@ -55,7 +67,7 @@ static JSGCDDispatcher *_sharedGCDDispatcher;
   // If a block is submitted to the queue that is already on the main run loop, 
   // the thread will block forever waiting for the completion of the block -- which will never happen.
   if ([NSThread currentThread] == [NSThread mainThread]) {
-		block();    
+    block();    
   } else {
     dispatch_sync(dispatch_get_main_queue(), block);    
   }
