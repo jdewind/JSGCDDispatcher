@@ -16,5 +16,6 @@ JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple 
 
 # TODO
 
-* Better documentation
+* Better documentation      
+* Add OS X Test Target
 * Wrap other GCD APIs
