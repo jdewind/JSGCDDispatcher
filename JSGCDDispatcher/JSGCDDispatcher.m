@@ -102,18 +102,21 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority requestBackgroundTime:(BOOL)canRunInBackground {
   if (canRunInBackground) {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
+      dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
       [self.application endBackgroundTask:bgTask];
-      @synchronized(self) { bgTask = UIBackgroundTaskInvalid; };
+      bgTask = UIBackgroundTaskInvalid;
+      dispatch_semaphore_signal(semaphore);
     }];
 
     block = ^{
-      @synchronized(self) {
-        if (bgTask != UIBackgroundTaskInvalid) {
-          block();
-          [self.application endBackgroundTask:bgTask];
-        }        
+      dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+      if (bgTask != UIBackgroundTaskInvalid) {
+        block();
+        [self.application endBackgroundTask:bgTask];
       }
+      dispatch_semaphore_signal(semaphore);
     };
   }
   [self dispatch:block priority:priority];
