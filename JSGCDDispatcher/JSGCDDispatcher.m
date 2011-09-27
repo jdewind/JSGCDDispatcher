@@ -1,5 +1,7 @@
 #import "JSGCDDispatcher.h"
 
+NSString *const JSDefaultSerialQueueName = @"com.jsgcd.dispatch";
+
 static JSGCDDispatcher *gSharedGCDDispatcher;
 
 @implementation JSGCDDispatcher
@@ -11,7 +13,7 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 + (void)initialize {
   if (self == [JSGCDDispatcher class]) {
-    gSharedGCDDispatcher = [[self alloc] initWithSerialQueueID:@"com.jsgcd.dispatch"];    
+    gSharedGCDDispatcher = [[self alloc] initWithSerialQueueID:JSDefaultSerialQueueName];    
   }
 }
 

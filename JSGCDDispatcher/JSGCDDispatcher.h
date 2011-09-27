@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+NSString *const JSDefaultSerialQueueName;
+
 @interface JSGCDDispatcher : NSObject {
   @protected  
   dispatch_queue_t serial_dispatch_queue;
