@@ -17,23 +17,23 @@ describe(@"JSGCDDispatcher", ^{
     queueLabel = [NSMutableString string];
   });
   
-  describe(@"#dispatch:concurrent:", ^{
-    it(@"executes the block on the global queue if serial is 'NO'", ^{
+  describe(@"#dispatch:", ^{
+    it(@"executes the block on the global default priority queue", ^{
       [target dispatch:^{
         [queueLabel appendString:GetQueueLabel(dispatch_get_current_queue())];
-      } serial:NO];
+      }];
       
       [[queueLabel shouldEventually] equal:@"com.apple.root.default-priority"];
     });
-    
-    it(@"executes the block on the default serial queue if serial is set to 'YES'", ^{
-      [target dispatch:^{
-        [queueLabel appendString:GetQueueLabel(dispatch_get_current_queue())];
-      } serial:YES];
-      
-      [[queueLabel shouldEventually] equal:JSDefaultSerialQueueName];      
-    });    
   });
+
+#if TARGET_OS_IPHONE
+  describe(@"dispatch:priority:requestBackgroundTime:", ^{
+    pending(@"it does not execute the block if the application is not granted background time", ^{});
+    pending(@"it does not execute the block if the available time to execute expires", ^{});
+    pending(@"it executes the block and ends the task", ^{});
+  });
+#endif
   
   describe(@"#dispatch:priority:", ^{
     it(@"executes on the default priority queue", ^{

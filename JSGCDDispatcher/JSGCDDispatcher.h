@@ -7,6 +7,11 @@ NSString *const JSDefaultSerialQueueName;
   dispatch_queue_t serial_dispatch_queue;
   dispatch_group_t serial_group;
   NSString *_serialQueueID;
+#if TARGET_OS_IPHONE
+  @private
+  BOOL _backgroundTimeAvailable;
+  UIApplication *_application;
+#endif
 }
 
 + (id)sharedDispatcher; 
@@ -17,8 +22,11 @@ NSString *const JSDefaultSerialQueueName;
 - (id)initWithSerialQueueID:(NSString *)serialQueueID;
 
 - (void)submitSerialQueueCompletionListener:(void (^)(void))block;
-- (void)dispatch:(void (^)(void))block serial:(BOOL)runOnSerialQueue;
+- (void)dispatch:(void (^)(void))block;
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority;
+#if TARGET_OS_IPHONE
+- (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority requestBackgroundTime:(BOOL)canRunInBackground;
+#endif
 - (void)dispatchOnSerialQueue:(void (^)(void))block;
 - (void)dispatchOnMainThread:(void (^)(void))block;
 @end
