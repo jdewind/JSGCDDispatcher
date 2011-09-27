@@ -11,6 +11,7 @@ SPEC_BEGIN(JSGCDDispatcherSpec)
 describe(@"JSGCDDispatcher", ^{
   __block JSGCDDispatcher *target = nil;
   __block NSMutableString *queueLabel = nil;
+  
   beforeEach(^{
     target = [JSGCDDispatcher sharedDispatcher];
     queueLabel = [NSMutableString string];

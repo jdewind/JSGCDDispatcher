@@ -16,7 +16,5 @@ JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple 
 
 # TODO
 
-* Add Kiwi Specs
 * Better documentation
-* Add podspec
-
+* Wrap other GCD APIs
