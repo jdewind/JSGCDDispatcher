@@ -100,26 +100,24 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 #pragma mark - iOS Background Queuing
 
-- (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority requestBackgroundTime:(BOOL)canRunInBackground {
-  if (canRunInBackground) {
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    __block UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
-      dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-      [self.application endBackgroundTask:bgTask];
-      bgTask = UIBackgroundTaskInvalid;
-      dispatch_semaphore_signal(semaphore);
-    }];
+- (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority {
+  __block UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
+    [self.application endBackgroundTask:bgTask];
+    @synchronized(self) {bgTask = UIBackgroundTaskInvalid;};
+  }];
 
-    block = ^{
-      dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-      if (bgTask != UIBackgroundTaskInvalid) {
-        block();
-        [self.application endBackgroundTask:bgTask];
+  void(^gcdBlock)(void) = ^{
+    @synchronized(self) {
+      @try {
+        block(bgTask);        
       }
-      dispatch_semaphore_signal(semaphore);
-    };
-  }
-  [self dispatch:block priority:priority];
+      @finally {
+        [self.application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;        
+      }
+    }
+  };
+  [self dispatch:gcdBlock priority:priority];
 }
 #endif
 

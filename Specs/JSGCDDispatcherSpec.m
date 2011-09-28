@@ -29,9 +29,14 @@ describe(@"JSGCDDispatcher", ^{
 
 #if TARGET_OS_IPHONE
   describe(@"dispatch:priority:requestBackgroundTime:", ^{
-    pending(@"it does not execute the block if the application is not granted background time", ^{});
-    pending(@"it does not execute the block if the available time to execute expires", ^{});
-    pending(@"it executes the block and ends the task", ^{});
+    __block id application = nil;
+    
+    beforeEach(^{
+      application = [UIApplication mockWithName:@"application"];
+    });
+    pending(@"it ends the task if the expiration handler is called", ^{});
+    pending(@"it executes the block on the GCD queue and ends the task", ^{});
+    pending(@"it ends the task even if the block throws an exception", ^{});
   });
 #endif
   

@@ -25,7 +25,7 @@ NSString *const JSDefaultSerialQueueName;
 - (void)dispatch:(void (^)(void))block;
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority;
 #if TARGET_OS_IPHONE
-- (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority requestBackgroundTime:(BOOL)canRunInBackground;
+- (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority;
 #endif
 - (void)dispatchOnSerialQueue:(void (^)(void))block;
 - (void)dispatchOnMainThread:(void (^)(void))block;
