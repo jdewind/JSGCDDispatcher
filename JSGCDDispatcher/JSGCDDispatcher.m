@@ -6,6 +6,8 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 #if TARGET_OS_IPHONE
 @interface JSGCDDispatcher()
+- (void)addBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier;
+- (UIBackgroundTaskIdentifier)removeBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier;
 @property (readonly, retain) NSMutableSet *backgroundTasks;
 @property (nonatomic, retain) UIApplication *application;
 @end
@@ -102,24 +104,22 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 - (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority {
   UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
-    BOOL hasBgTask = [self.backgroundTasks containsObject:[NSNumber numberWithUnsignedInteger:bgTask]];
-    [self.application endBackgroundTask:hasBgTask ? bgTask : UIBackgroundTaskInvalid];      
-    [self.backgroundTasks removeObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+    UIBackgroundTaskIdentifier identifier = [self removeBackgroundTaskID:bgTask];
+    [self.application endBackgroundTask:identifier];      
   }];  
   
-  [self.backgroundTasks addObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+  [self addBackgroundTaskID:bgTask];
   
   void(^gcdBlock)(void) = ^{
-    BOOL hasBgTask = [self.backgroundTasks containsObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+    UIBackgroundTaskIdentifier identifier = [self removeBackgroundTaskID:bgTask];
     @try {
-      block(hasBgTask ? bgTask : UIBackgroundTaskInvalid);        
+      block(identifier);        
     }
     @catch (NSException *exception) {
       NSLog(@"Exception thrown in backgrond task: %@", exception);
     }
     @finally {
-      [self.application endBackgroundTask:hasBgTask ? bgTask : UIBackgroundTaskInvalid];
-      [self.backgroundTasks removeObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+      [self.application endBackgroundTask:identifier];
     }
   };
   [self dispatch:gcdBlock priority:priority];
@@ -128,4 +128,22 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 #pragma mark - Private
 
+#if TARGET_OS_IPHONE
+- (void)addBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier {
+  if (identifier != UIBackgroundTaskInvalid) {
+    [self.backgroundTasks addObject:[NSNumber numberWithUnsignedInteger:identifier]];    
+  }  
+}
+
+- (UIBackgroundTaskIdentifier)removeBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier {
+  NSNumber *boxedIdentifier = [NSNumber numberWithUnsignedInteger:identifier];
+  if ([self.backgroundTasks containsObject:boxedIdentifier]) {
+    [self.backgroundTasks removeObject:boxedIdentifier];
+    return identifier;
+  } else {
+    return UIBackgroundTaskInvalid;
+  }
+}
+
+#endif
 @end
