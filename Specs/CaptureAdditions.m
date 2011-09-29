@@ -38,6 +38,14 @@
 @end
 
 @implementation KWMock (CaptureAdditions)
+- (KWCaptureSpy *)capture:(SEL)selector atIndex:(NSUInteger)index andReturn:(id)value {
+  KWCaptureSpy *spy = [[[KWCaptureSpy alloc] initWithArgumentIndex:index] autorelease];
+  KWMessagePattern *pattern = [KWMessagePattern messagePatternWithSelector:selector];
+  [self stubMessagePattern:pattern andReturn:value];
+  [self addMessageSpy:spy forMessagePattern:pattern];
+  return  spy;  
+}
+
 - (KWCaptureSpy *)capture:(SEL)selector atIndex:(NSUInteger)index {
   KWCaptureSpy *spy = [[[KWCaptureSpy alloc] initWithArgumentIndex:index] autorelease];
   [self addMessageSpy:spy forMessagePattern:[KWMessagePattern messagePatternWithSelector:selector]];

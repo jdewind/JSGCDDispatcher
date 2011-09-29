@@ -5,6 +5,12 @@
 #import "JSGCDDispatcher.h"
 #import "CaptureAdditions.h"
 
+#ifdef kKW_DEFAULT_PROBE_TIMEOUT
+#undef kKW_DEFAULT_PROBE_TIMEOUT
+#endif
+
+#define kKW_DEFAULT_PROBE_TIMEOUT 2.0
+
 static NSString* GetQueueLabel(dispatch_queue_t queue)
 {
   return [NSString stringWithUTF8String:dispatch_queue_get_label(queue)];
@@ -41,10 +47,10 @@ describe(@"JSGCDDispatcher", ^{
     });
     
     it(@"it ends the task if the expiration handler is called", ^{
-      KWCaptureSpy *spy = [application capture:@selector(beginBackgroundTaskWithExpirationHandler:) atIndex:0];
+      KWCaptureSpy *spy = [application capture:@selector(beginBackgroundTaskWithExpirationHandler:) atIndex:0 andReturn:theValue(4353)];
       
-      [[[application should] receive] endBackgroundTask:0];
       [[[application shouldEventually] receive] endBackgroundTask:UIBackgroundTaskInvalid];
+      [[[application shouldEventually] receive] endBackgroundTask:4353];
             
       [target dispatchBackgroundTask:^(UIBackgroundTaskIdentifier identifier) {
         [NSThread sleepForTimeInterval:0.5];

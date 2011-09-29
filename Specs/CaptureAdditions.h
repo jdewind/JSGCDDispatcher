@@ -13,6 +13,7 @@
 @end
 
 @interface KWMock (CaptureAdditions)
+- (KWCaptureSpy *)capture:(SEL)selector atIndex:(NSUInteger)index andReturn:(id)value;
 - (KWCaptureSpy *)capture:(SEL)selector atIndex:(NSUInteger)index;
 - (KWCaptureSpy *)capture:(SEL)selector atIndex:(NSUInteger)index argumentFilters:(NSArray *)array;
 @end
