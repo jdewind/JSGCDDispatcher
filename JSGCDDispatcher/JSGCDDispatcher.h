@@ -11,6 +11,7 @@ NSString *const JSDefaultSerialQueueName;
   @private
   BOOL _backgroundTimeAvailable;
   UIApplication *_application;
+  NSMutableSet *_backgroundTasks;
 #endif
 }
 

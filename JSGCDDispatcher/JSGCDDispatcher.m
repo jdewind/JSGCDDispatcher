@@ -6,7 +6,7 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 
 #if TARGET_OS_IPHONE
 @interface JSGCDDispatcher()
-@property (assign, getter = isBackgroundTimeAvailable) BOOL backgroundTimeAvailable;
+@property (readonly, retain) NSMutableSet *backgroundTasks;
 @property (nonatomic, retain) UIApplication *application;
 @end
 #endif
@@ -14,7 +14,7 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 @implementation JSGCDDispatcher
 @synthesize serialQueueID = _serialQueueID;
 #if TARGET_OS_IPHONE
-@synthesize backgroundTimeAvailable = _backgroundTimeAvailable;
+@synthesize backgroundTasks = _backgroundTasks;
 @synthesize application = _application;
 #endif
 
@@ -44,7 +44,7 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
     serial_dispatch_queue = dispatch_queue_create([self.serialQueueID UTF8String], NULL);
     serial_group = dispatch_group_create();
 #if TARGET_OS_IPHONE
-    self.backgroundTimeAvailable = YES;
+    _backgroundTasks = [[NSMutableSet alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 #endif
   }
@@ -101,20 +101,25 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 #pragma mark - iOS Background Queuing
 
 - (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority {
-  __block UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
-    [self.application endBackgroundTask:bgTask];
-    @synchronized(self) {bgTask = UIBackgroundTaskInvalid;};
-  }];
-
+  UIBackgroundTaskIdentifier bgTask = [self.application beginBackgroundTaskWithExpirationHandler:^{
+    BOOL hasBgTask = [self.backgroundTasks containsObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+    [self.application endBackgroundTask:hasBgTask ? bgTask : UIBackgroundTaskInvalid];      
+    [self.backgroundTasks removeObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+  }];  
+  
+  [self.backgroundTasks addObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+  
   void(^gcdBlock)(void) = ^{
-    @synchronized(self) {
-      @try {
-        block(bgTask);        
-      }
-      @finally {
-        [self.application endBackgroundTask:bgTask];
-        bgTask = UIBackgroundTaskInvalid;        
-      }
+    BOOL hasBgTask = [self.backgroundTasks containsObject:[NSNumber numberWithUnsignedInteger:bgTask]];
+    @try {
+      block(hasBgTask ? bgTask : UIBackgroundTaskInvalid);        
+    }
+    @catch (NSException *exception) {
+      NSLog(@"Exception thrown in backgrond task: %@", exception);
+    }
+    @finally {
+      [self.application endBackgroundTask:hasBgTask ? bgTask : UIBackgroundTaskInvalid];
+      [self.backgroundTasks removeObject:[NSNumber numberWithUnsignedInteger:bgTask]];
     }
   };
   [self dispatch:gcdBlock priority:priority];

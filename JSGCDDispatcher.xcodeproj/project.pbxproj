@@ -10,10 +10,13 @@
 		4B499768142AB43000AA0B9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B499767142AB43000AA0B9E /* Foundation.framework */; };
 		4B499773142AB4B400AA0B9E /* JSGCDDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B499771142AB4B400AA0B9E /* JSGCDDispatcher.m */; };
 		4B499774142AB4B400AA0B9E /* JSGCDDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B499772142AB4B400AA0B9E /* JSGCDDispatcher.h */; };
+		4B55459714329D1C00F22E51 /* CaptureAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B55459514329D1C00F22E51 /* CaptureAdditions.h */; };
 		4B89BE3E14313CEA009B81DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B89BE3D14313CEA009B81DB /* UIKit.framework */; };
 		4B89BE3F14313CEA009B81DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B499767142AB43000AA0B9E /* Foundation.framework */; };
 		4B89BE4114313CEA009B81DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B89BE4014313CEA009B81DB /* CoreGraphics.framework */; };
 		4B89BE4714313CEA009B81DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B89BE4514313CEA009B81DB /* InfoPlist.strings */; };
+		4BA581881433D88F0033DE4F /* CaptureAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B55459414329D1C00F22E51 /* CaptureAdditions.m */; };
+		4BA5818A1433D9B10033DE4F /* OCHamcrest-iPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA581891433D9B10033DE4F /* OCHamcrest-iPhone.framework */; };
 		4BC485BF14313DFA008FDCA6 /* KWAfterAllNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC4852F14313DFA008FDCA6 /* KWAfterAllNode.m */; };
 		4BC485C014313DFA008FDCA6 /* KWAfterEachNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC4853114313DFA008FDCA6 /* KWAfterEachNode.m */; };
 		4BC485C114313DFA008FDCA6 /* KWAsyncVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC4853314313DFA008FDCA6 /* KWAsyncVerifier.m */; };
@@ -91,12 +94,15 @@
 		4B49976B142AB43100AA0B9E /* JSGCDDispatcher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSGCDDispatcher-Prefix.pch"; sourceTree = "<group>"; };
 		4B499771142AB4B400AA0B9E /* JSGCDDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGCDDispatcher.m; sourceTree = "<group>"; };
 		4B499772142AB4B400AA0B9E /* JSGCDDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGCDDispatcher.h; sourceTree = "<group>"; };
+		4B55459414329D1C00F22E51 /* CaptureAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureAdditions.m; sourceTree = "<group>"; };
+		4B55459514329D1C00F22E51 /* CaptureAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureAdditions.h; sourceTree = "<group>"; };
 		4B89BE3C14313CEA009B81DB /* Specs.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Specs.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B89BE3D14313CEA009B81DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B89BE4014313CEA009B81DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4B89BE4414313CEA009B81DB /* Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Specs-Info.plist"; sourceTree = "<group>"; };
 		4B89BE4614313CEA009B81DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B89BE4814313CEA009B81DB /* Specs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
+		4BA581891433D9B10033DE4F /* OCHamcrest-iPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "OCHamcrest-iPhone.framework"; path = "Specs/OCHamcrest-iPhone.framework"; sourceTree = "<group>"; };
 		4BC4852914313DFA008FDCA6 /* Kiwi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kiwi.h; sourceTree = "<group>"; };
 		4BC4852A14313DFA008FDCA6 /* KiwiBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KiwiBlockMacros.h; sourceTree = "<group>"; };
 		4BC4852B14313DFA008FDCA6 /* KiwiConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KiwiConfiguration.h; sourceTree = "<group>"; };
@@ -266,6 +272,7 @@
 				4B89BE3E14313CEA009B81DB /* UIKit.framework in Frameworks */,
 				4B89BE3F14313CEA009B81DB /* Foundation.framework in Frameworks */,
 				4B89BE4114313CEA009B81DB /* CoreGraphics.framework in Frameworks */,
+				4BA5818A1433D9B10033DE4F /* OCHamcrest-iPhone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +301,7 @@
 		4B499766142AB43000AA0B9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BA581891433D9B10033DE4F /* OCHamcrest-iPhone.framework */,
 				4B499767142AB43000AA0B9E /* Foundation.framework */,
 				4B89BE3D14313CEA009B81DB /* UIKit.framework */,
 				4B89BE4014313CEA009B81DB /* CoreGraphics.framework */,
@@ -332,6 +340,8 @@
 		4B89BE4314313CEA009B81DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4B55459414329D1C00F22E51 /* CaptureAdditions.m */,
+				4B55459514329D1C00F22E51 /* CaptureAdditions.h */,
 				4B89BE4414313CEA009B81DB /* Specs-Info.plist */,
 				4B89BE4514313CEA009B81DB /* InfoPlist.strings */,
 				4B89BE4814313CEA009B81DB /* Specs-Prefix.pch */,
@@ -505,6 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B499774142AB4B400AA0B9E /* JSGCDDispatcher.h in Headers */,
+				4B55459714329D1C00F22E51 /* CaptureAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BC4860514313EA5008FDCA6 /* JSGCDDispatcher.m in Sources */,
+				4BA581881433D88F0033DE4F /* CaptureAdditions.m in Sources */,
 				4BC485BF14313DFA008FDCA6 /* KWAfterAllNode.m in Sources */,
 				4BC485C014313DFA008FDCA6 /* KWAfterEachNode.m in Sources */,
 				4BC485C114313DFA008FDCA6 /* KWAsyncVerifier.m in Sources */,
@@ -758,6 +770,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Specs\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
@@ -766,6 +779,9 @@
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
+					"-ObjC",
+					"-all_load",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
@@ -779,6 +795,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Specs\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
@@ -787,6 +804,9 @@
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
+					"-ObjC",
+					"-all_load",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;

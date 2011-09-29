@@ -1,5 +1,9 @@
+#define HC_SHORTHAND
+
+#import <OCHamcrest-iPhone/OCHamcrest.h>
 #import "Kiwi.h"
 #import "JSGCDDispatcher.h"
+#import "CaptureAdditions.h"
 
 static NSString* GetQueueLabel(dispatch_queue_t queue)
 {
@@ -13,7 +17,7 @@ describe(@"JSGCDDispatcher", ^{
   __block NSMutableString *queueLabel = nil;
   
   beforeEach(^{
-    target = [JSGCDDispatcher sharedDispatcher];
+    target = [JSGCDDispatcher dispatcherWithSerialQueueID:@"com.myqueue"];
     queueLabel = [NSMutableString string];
   });
   
@@ -26,17 +30,49 @@ describe(@"JSGCDDispatcher", ^{
       [[queueLabel shouldEventually] equal:@"com.apple.root.default-priority"];
     });
   });
-
+  
 #if TARGET_OS_IPHONE
   describe(@"dispatch:priority:requestBackgroundTime:", ^{
     __block id application = nil;
     
     beforeEach(^{
       application = [UIApplication mockWithName:@"application"];
+      [target setValue:application forKey:@"application"];
     });
-    pending(@"it ends the task if the expiration handler is called", ^{});
-    pending(@"it executes the block on the GCD queue and ends the task", ^{});
-    pending(@"it ends the task even if the block throws an exception", ^{});
+    
+    it(@"it ends the task if the expiration handler is called", ^{
+      KWCaptureSpy *spy = [application capture:@selector(beginBackgroundTaskWithExpirationHandler:) atIndex:0];
+      
+      [[[application should] receive] endBackgroundTask:0];
+      [[[application shouldEventually] receive] endBackgroundTask:UIBackgroundTaskInvalid];
+            
+      [target dispatchBackgroundTask:^(UIBackgroundTaskIdentifier identifier) {
+        [NSThread sleepForTimeInterval:0.5];
+      } priority:DISPATCH_QUEUE_PRIORITY_DEFAULT];
+      
+      dispatch_block_t block = spy.argument;
+      block();
+    });
+    
+    it(@"it executes the block on the GCD queue and ends the task", ^{      
+      [[application stubAndReturn:theValue(19403)] beginBackgroundTaskWithExpirationHandler:(id)anything()];
+      [[[application shouldEventually] receive] endBackgroundTask:19403];
+      
+      [target dispatchBackgroundTask:^(UIBackgroundTaskIdentifier identifier) {
+        [queueLabel appendFormat:@"%d", identifier];
+      } priority:DISPATCH_QUEUE_PRIORITY_DEFAULT];      
+      
+      [[queueLabel shouldEventually] equal:@"19403"];            
+    });
+    
+    it(@"it ends the task even if the block throws an exception", ^{
+      [[application stubAndReturn:theValue(19403)] beginBackgroundTaskWithExpirationHandler:(id)anything()];
+      [[[application shouldEventually] receive] endBackgroundTask:19403];
+      
+      [target dispatchBackgroundTask:^(UIBackgroundTaskIdentifier identifier) {
+        @throw [NSException exceptionWithName:@"Exception" reason:@"" userInfo:nil];
+      } priority:DISPATCH_QUEUE_PRIORITY_DEFAULT];      
+    });
   });
 #endif
   
@@ -80,7 +116,7 @@ describe(@"JSGCDDispatcher", ^{
         [queueLabel appendString:GetQueueLabel(dispatch_get_current_queue())];        
       }];
       
-      [[queueLabel shouldEventually] equal:JSDefaultSerialQueueName];      
+      [[queueLabel shouldEventually] equal:@"com.myqueue"];      
     });    
   });
   
@@ -120,21 +156,7 @@ describe(@"JSGCDDispatcher", ^{
       
       [[status shouldEventually] equal:@"Block 1 Block 2 Complete"];            
     });
-  });
-  
-  describe(@".dispatcherWithSerialQueueID:", ^{
-    beforeEach(^{
-      target = [JSGCDDispatcher dispatcherWithSerialQueueID:@"com.dewind"];
-    });
-    
-    it(@"creates a dispatcher with the given serial queue id", ^{
-      [target dispatchOnSerialQueue:^{
-        [queueLabel appendString:GetQueueLabel(dispatch_get_current_queue())];        
-      }];
-      
-      [[queueLabel shouldEventually] equal:@"com.dewind"];      
-    });
-  });
+  });   
 });
 
 SPEC_END
