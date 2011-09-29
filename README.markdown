@@ -36,7 +36,7 @@ Invoke this method when you have a task that is important and should not be inte
 
 ```objective-c
 [target dispatchBackgroundTask:^(UIBackgroundTaskIdentifier identifier) {
-  if(identifier = UIBackgroundTaskInvalid) {
+  if(identifier == UIBackgroundTaskInvalid) {
     // Almost out of time to run the task
   } else {
     // Good to go
