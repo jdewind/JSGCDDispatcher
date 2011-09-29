@@ -14,6 +14,7 @@ JSGCDDipatcher is a small Objective-C wrapper around GCD that provides a simple 
 [[JSGCDDipatcher sharedDispatcher] dispatch:^{
   // Busy Work
 } priority:DISPATCH_QUEUE_PRIORITY_DEFAULT];
+```
 
 ## Serial Queue
 
