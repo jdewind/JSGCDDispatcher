@@ -47,7 +47,6 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
     serial_group = dispatch_group_create();
 #if TARGET_OS_IPHONE
     _backgroundTasks = [[NSMutableSet alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 #endif
   }
   
@@ -97,6 +96,11 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 - (void)submitSerialQueueCompletionListener:(void (^)(void))block {
   dispatch_group_notify(serial_group, serial_dispatch_queue, block);
 }
+
+- (void)waitForSerialQueueToComplete:(NSTimeInterval)timeout {
+  dispatch_group_wait(serial_group, timeout * NSEC_PER_SEC);
+}
+
 
 #if TARGET_OS_IPHONE
 

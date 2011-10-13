@@ -22,12 +22,13 @@ NSString *const JSDefaultSerialQueueName;
 
 - (id)initWithSerialQueueID:(NSString *)serialQueueID;
 
-- (void)submitSerialQueueCompletionListener:(void (^)(void))block;
 - (void)dispatch:(void (^)(void))block;
 - (void)dispatch:(void (^)(void))block priority:(dispatch_queue_priority_t)priority;
+- (void)submitSerialQueueCompletionListener:(void (^)(void))block;
+- (void)dispatchOnSerialQueue:(void (^)(void))block;
+- (void)waitForSerialQueueToComplete:(NSTimeInterval)timeout;
+- (void)dispatchOnMainThread:(void (^)(void))block;
 #if TARGET_OS_IPHONE
 - (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority;
 #endif
-- (void)dispatchOnSerialQueue:(void (^)(void))block;
-- (void)dispatchOnMainThread:(void (^)(void))block;
 @end
