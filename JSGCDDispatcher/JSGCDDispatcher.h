@@ -1,4 +1,7 @@
 #import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
 
 NSString *const JSDefaultSerialQueueName;
 
@@ -28,6 +31,8 @@ NSString *const JSDefaultSerialQueueName;
 - (void)dispatchOnSerialQueue:(void (^)(void))block;
 - (void)waitForSerialQueueToComplete:(NSTimeInterval)timeout;
 - (void)dispatchOnMainThread:(void (^)(void))block;
+- (void)suspendSerialQueue;
+- (void)resumeSerialQueue;
 #if TARGET_OS_IPHONE
 - (void)dispatchBackgroundTask:(void (^)(UIBackgroundTaskIdentifier identifier))block priority:(dispatch_queue_priority_t)priority;
 #endif

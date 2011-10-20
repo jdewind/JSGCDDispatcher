@@ -101,6 +101,15 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
   dispatch_group_wait(serial_group, timeout * NSEC_PER_SEC);
 }
 
+#pragma mark - Resume and Suspend
+
+- (void)suspendSerialQueue {
+  dispatch_suspend(serial_dispatch_queue);
+}
+
+- (void)resumeSerialQueue {
+  dispatch_resume(serial_dispatch_queue);
+}
 
 #if TARGET_OS_IPHONE
 

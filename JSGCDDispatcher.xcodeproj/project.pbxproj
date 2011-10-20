@@ -563,6 +563,7 @@
 		4B49975B142AB43000AA0B9E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Atomic Object";
 			};
 			buildConfigurationList = 4B49975E142AB43000AA0B9E /* Build configuration list for PBXProject "JSGCDDispatcher" */;
@@ -746,6 +747,7 @@
 				DSTROOT = /tmp/JSGCDDispatcher.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSGCDDispatcher/JSGCDDispatcher-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -758,6 +760,7 @@
 				DSTROOT = /tmp/JSGCDDispatcher.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JSGCDDispatcher/JSGCDDispatcher-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
