@@ -563,7 +563,7 @@
 		4B49975B142AB43000AA0B9E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Atomic Object";
 			};
 			buildConfigurationList = 4B49975E142AB43000AA0B9E /* Build configuration list for PBXProject "JSGCDDispatcher" */;
