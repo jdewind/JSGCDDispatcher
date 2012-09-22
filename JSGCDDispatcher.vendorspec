@@ -1,0 +1,14 @@
+Vendor::Spec.new do |s|
+
+  s.name         "JSGCDDispatcher"
+  s.version      "0.4"
+
+  s.authors      "Justin DeWind"
+  s.email        "dewind@atomicobject.com"
+  s.description  "A small Objective-C wrapper around GCD"
+
+  s.homepage     "https://github.com/dewind/JSGCDDispatcher"
+
+  s.files        Dir["JSGCDDispatcher/*.{h,m}"]
+
+end
