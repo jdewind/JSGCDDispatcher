@@ -8,8 +8,8 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 @interface JSGCDDispatcher()
 - (void)addBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier;
 - (UIBackgroundTaskIdentifier)removeBackgroundTaskID:(UIBackgroundTaskIdentifier)identifier;
-@property (readonly, retain) NSMutableSet *backgroundTasks;
-@property (nonatomic, retain) UIApplication *application;
+@property (readonly, strong) NSMutableSet *backgroundTasks;
+@property (nonatomic, strong) UIApplication *application;
 @end
 #endif
 
@@ -34,7 +34,7 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
 }
 
 + (id)dispatcherWithSerialQueueID:(NSString *)serialQueueID {
-  return [[[self alloc] initWithSerialQueueID:serialQueueID] autorelease];
+  return [[self alloc] initWithSerialQueueID:serialQueueID];
 }
 
 #pragma mark -
@@ -57,15 +57,13 @@ static JSGCDDispatcher *gSharedGCDDispatcher;
   if (!_application) {
     _application = [UIApplication sharedApplication];
   }
-  return [[_application retain] autorelease];
+  return _application;
 }
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   dispatch_release(serial_dispatch_queue);
   dispatch_release(serial_group);  
-  [_serialQueueID release];
-  [super dealloc];
 }
 
 #pragma mark -
